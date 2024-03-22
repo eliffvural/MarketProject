@@ -23,3 +23,59 @@ void Liste::olustur(){
     //baslangicta dugum sayisi sifirdir.
 }
 
+void Liste::sil(int siraNo){
+
+    //listede yer alan bir dugumu silme fonksiyonu yaziyoruz:
+    Market_dugum* tara, *arka;
+    int sayac=1;
+    tara=bas;
+
+    if(siraNo<=0){
+       std:: cout<<"Hatali kayit sira no girildi.\n"<<std::endl;
+       return;
+    }
+
+    if(siraNo==1){
+        bas=bas->sonraki;
+        delete tara;
+        dugumSayisi--;
+        return;
+    }
+
+    while((tara!=nullptr) && (sayac<siraNo)){
+        arka=tara;
+        tara=tara->sonraki;
+        sayac++;
+    }
+
+    if(sayac<siraNo){
+        //verilen siraNo cok buyuk oldugu durumda:
+        std::cout<<"Silinecek kayit bulunamadi."<<std::endl;
+    }
+
+    else{
+        //simdi de silinecek kayit buldugumuz durumdayiz:
+
+        arka->sonraki=tara->sonraki;
+        delete tara;
+        dugumSayisi--;
+    }
+}
+
+void Liste:: listeBosalt(){
+    Market_dugum* p;
+    while(bas){
+        p=bas;
+        bas=bas->sonraki;
+        delete p;
+    }
+    dugumSayisi=0;
+}
+
+
+
+
+int main(){
+    kasa.olustur();
+}
+
